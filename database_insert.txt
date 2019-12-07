@@ -1,0 +1,28 @@
+staff_subject:
+ST102 Manikandan Applied Data Science 15E102 3 6 2019 ECE,CSE,IT 15E1023619A
+ST104 Kannimuthu Advanced Data Structures 15E302 3 6 2019 ECE,CSE,IT,EEE 15E3023619A
+ST206 Mithya Digital Signal Processing 15L312 3 6 2019 ECE,EEE 15L3123619A
+ST102 Manikandan Applied Data Science 15E102 3 6 2019 EEE,ETE 15E1023619B
+
+student_subject:
+16L134 Applied Data Science 15E102 3 6 2019 ECE 15E1023619A
+16L134 Advanced Data Structures 15E302 3 6 2019 ECE 15E3023619A
+16L134 Digital Signal Processing 15L312 3 6 2019 ECE 15L3123619A
+16l117 Digital Signal Processing 15L312 3 6 2019 ECE 15L3123619A
+16L114 Digital Signal Processing 15L312 3 6 2019 ECE 15L3123619A
+16l137 Advanced Data Structures 15E302 3 6 2019 ECE 15E3023619A
+16L117 Applied Data Science 15E102 3 6 2019 Ece 15E1023619B
+
+
+Login_designation
+ST102 Manikandan Professor Karpagam College of Engineering
+ST104 Kannimuthu Professor Karpagam College of Engineering
+ST206 Mithya Professor Karpagam College of Engineering
+16L134 Sam Jones Student Karpagam College of Engineering
+16L117 Kharishree Student Karpagam College of Engineering
+16L137 Selva Brindha Student Karpagam College of Engineering
+16L114 Jennifer Student Karpagam College of Engineering
+
+
+
+

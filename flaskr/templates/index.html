@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<title>Chatbot</title>
+<head>
+<link rel="shortcut icon" type="image/x-icon" href="http://samjc310.000webhostapp.com/blog/favicon.ico" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
+<style type="text/css">
+.important { color: #336699;
+font-family: "Courier New", Courier, monospace ;
+}
+</style>
+</head>
+<body>
+{% if noresp==1 %}
+<script>
+window.alert('Login Failed.Face not recognized.Try Again or Sign Up if new user.')
+</script>
+{% elif noresp==2 %}
+<script>
+window.alert('Login Failed.Username and password not valid.Retry Again.')
+</script>
+{% elif noresp==3 %}
+<script>
+window.alert('Login Failed.Face not detected.Try Again.')
+</script>
+{% endif %}
+
+<br>
+<br>
+<br>
+<div class="container">
+<div class="row">
+<div class="col-sm-8">
+<h1 class="important text-center">Face Authentication Login</h1>
+<div class="row">
+<div class="col-sm-1"></div>
+<form method="POST" action="http://localhost:80/Chatbot/data.php">
+<div class="col-sm-10">
+<div id="my_camera"></div>
+  </div>
+<br/>
+</div>
+<div class="col-sm-1"></div>
+<input type="hidden" name="image" class="image-tag">
+<br/>
+<button class="btn btn-success center-block"id="sub" onclick="take_snapshot()">Submit</button>
+</form>
+
+</div>
+<div class="col-sm-4">
+<h1 class="important text-center">Login</h1>
+<form action ="/login" class="form" method ="GET" enctype = "multipart/form-data">
+<label for="name">UserID:</label>
+<input type="text" class="form-control" name="username" ></label>
+<br>
+<label for="name" >Password:</label>
+<input type="password" class="form-control" name="password" ></label>
+<br>
+<button type="submit" class="btn btn-primary center-block">Log In to Chatbot</button>
+</form>
+<br>
+<br>
+<a href="/signup" class="btn btn-success center-block col-sm-6">New Sign Up</a>
+<a></a>
+<a href="/signup_face" class="btn btn-primary center-block com-sm-6">Face Sign Up</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+<!-- Configure a few settings and attach camera -->
+<script language="JavaScript">
+Webcam.set({
+width: 590,
+height: 390,
+image_format: 'jpeg',
+jpeg_quality: 90
+});
+
+Webcam.attach( '#my_camera' );
+
+function take_snapshot() {
+Webcam.snap( function(data_uri) {
+$(".image-tag").val(data_uri);
+document.getElementById('my_camera').innerHTML = '<img src="'+data_uri+'"/>';
+document.getElementById('sub').click();
+} );
+}
+</script>
+</html>

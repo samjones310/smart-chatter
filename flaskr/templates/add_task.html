@@ -1,0 +1,110 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>Add Task</title> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='mystyle.css')}}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="http://samjc310.000webhostapp.com/blog/favicon.ico" />
+</head> 
+<body background-color="#E6E6FA"> 
+<style type="text/css">
+    .important { color: #336699;
+        font-family: "Courier New", Courier, monospace ;
+    }
+    .bottom-three {
+     margin-bottom:  1cm;
+    }
+</style>
+<br>
+<!--First Container-->
+<div class="container">
+<div class="row">
+<div class="col-sm-2">
+    <img src="{{url_for('static', filename='logo.PNG')}}" alt="MTX logo" style="width:150px;height:100px;">
+</div>
+<div class="col-sm-8 text-center">
+    <br>
+    <h1 class="important"><b>Hi {{name}}</b></h1>
+    <h3 class="important"><b>Add Task</b></h3>
+    <br>
+</div>
+</div>
+</div>
+
+<!--Second Container-->
+<div class="container">
+<div class="row">
+<div class="col-sm-4"></div>
+<div class="col-sm-4">
+    <form action="/add_task_html" class="form" method ="GET" enctype="multipart/form-data">
+    <input type="hidden" name="pid" value={{pid}} />
+    <select name="code" class="form-control">
+        {% for org in organisation %}
+        <option value= "{{org[0]}}">{{org[1]}}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <div class='input-group date' id='datetimepicker1'>
+        <input type='text' name="start_time" class="form-control" value="Start Time"/>
+        <span class="input-group-addon">
+         <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+    <br>
+    <div class='input-group date' id='datetimepicker2'>
+        <input type='text' name="end_time" class="form-control" value="End Time"/>
+        <span class="input-group-addon">
+         <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+    <br>
+    <select name="type" class="form-control">
+        <option value= "Internal">Internal</option>
+        <option value= "Semester">Semester</option>
+        <option value= "Unit Test">Unit Test</option>
+        <option value= "Others">Others</option>
+    </select>
+    <br>
+    <input class="form-control" type="text" name="rec_time" placeholder="Recommended Learing Hours min-max hrs" ></input>
+    <br>
+    <br>
+    <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="3" placeholder="Description"></textarea>
+    <br>
+    <br>
+    <button type="submit" class="btn btn-primary center-block">Add Task</button>
+    </form>
+    <br>
+    <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+    <a href="professor_dashboard?pid={{pid}}" class="btn btn-success center-block">View Dashboard</a>
+    </div>
+    <div class="col-sm-3"></div>
+    </div>
+   
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+
+<script type="text/javascript">
+$(function() {
+  $('#datetimepicker1').datetimepicker();
+});
+$(function() {
+  $('#datetimepicker2').datetimepicker();
+});
+</script>    
+<br>
+<br>
+</body>
+</html> 

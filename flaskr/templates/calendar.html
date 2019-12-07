@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<title>Calendar</title>
+<link href='https://samjc310.000webhostapp.com/cdn/fullcalendar.min.css' rel='stylesheet' />
+<link href='https://samjc310.000webhostapp.com/cdn/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+<script src='https://samjc310.000webhostapp.com/cdn/lib/moment.min.js'></script>
+<script src='https://samjc310.000webhostapp.com/cdn/lib/jquery.min.js'></script>
+<script src='https://samjc310.000webhostapp.com/cdn/fullcalendar.min.js'></script>
+<link rel="shortcut icon" type="image/x-icon" href="http://samjc310.000webhostapp.com/blog/favicon.ico" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script>
+
+//var name='{{name}}';
+var eve = {{ li|safe }};
+$(document).ready(function() {
+$('#calendar').fullCalendar({
+header: {
+left: 'prev,next today',
+center: 'title',
+right: 'month,agendaWeek,agendaDay,listWeek'
+},
+//defaultDate: name,
+navLinks: true, // can click day/week names to navigate views
+editable: true,
+eventLimit: true, // allow "more" link when too many events
+events: eve
+});
+
+});
+
+</script>
+<style>
+
+body {
+margin: 40px 10px;
+padding: 0;
+font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+font-size: 14px;
+}
+
+#calendar {
+max-width: 900px;
+margin: 0 auto;
+}
+.important { color: #336699;
+font-family: "Courier New", Courier, monospace ;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1 class="important text-center"><b>ChatBot Calendar</b></h1>
+<h2 class="important text-center">{{name}}</h2>
+<br>
+<div id='calendar'></div>
+</div>
+
+</body>
+</html>

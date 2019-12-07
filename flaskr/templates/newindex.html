@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<title>Chatbot</title>
+<head>
+<link rel="shortcut icon" type="image/x-icon" href="http://samjc310.000webhostapp.com/blog/favicon.ico" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+<div class="jumbotron" style="background-color:#1daeff !important;">
+<h2 style="color:#fff;">Twitter Hashtag</h2>      
+<p style="color:#fff;">Use Python to Webscrap all tweets and Media Files </p>
+</div>         
+</div>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-1" style="background-color:lavenderblush;"></div>
+<div class="col-sm-4" style="background-color:lavender;">
+<form class="form-inline" action="{{ url_for('gettweets')}}" method="GET">
+<div class="form-group">
+<br>
+<br>
+Hashtag:
+<input type="text" class="form-control" name="hash">
+</div><br><br>
+<br>
+Filename:
+<div class="form-group">
+<input type="text" class="form-control" name="filename">
+</div><br><br>
+<button type="submit" class="btn btn-primary btn-md">Get Tweets</button><br>
+<br>
+</form>
+</div>
+<div class="col-sm-1" style="background-color:lavenderblush;"><br>
+<br></div>
+<div class="col-sm-4" style="background-color:lavender;">
+<form class="form-inline" action="{{ url_for('getmedia')}}" method="GET">
+<div class="form-group">
+<br>
+<br>
+Username:
+<input type="text" class="form-control" name="username">
+</div><br><br>
+<br>
+Max Count:
+<div class="form-group text-center">
+<input type="number" class="form-control" name="count">
+</div><br><br>
+<button type="submit" class="btn btn-primary btn-md">Get Media</button><br>
+<br>
+</form></div>
+<div class="col-sm-1" style="background-color:lavenderblush;"></div>
+</div> 
+</div>
+
+<div class="container-fluid">
+<br>
+<br>
+<div class="row">
+<div class="col-sm-1" style="background-color:lavenderblush;"></div>
+<div class="col-sm-9" style="background-color:lavender;">
+{% if hast ==  1%}
+<table class="table">
+<thead>
+<tr>
+<th scope="col"> {{ tagname }}</th>
+<th scope="col">Positive</th>
+<th scope="col">Negative</th>
+<th scope="col">Netural</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">Count</th>
+<td> {{ positive }}</td>
+<td> {{ negative }}</td>
+<td> {{ neutral }}</td>
+</tr>
+<tr>
+<th scope="row">Ratio</th>
+<td> {{ pos }}</td>
+<td> {{ neg }}</td>
+<td> {{ neu }}</td>
+</tr>
+</tbody>
+</table>
+{% endif%}
+</div>
+<div class="col-sm-1" style="background-color:lavenderblush;"></div>
+</div>
+</body>
+</html>

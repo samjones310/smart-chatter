@@ -1,0 +1,161 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>Face Signup</title> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='mystyle.css')}}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="http://samjc310.000webhostapp.com/blog/favicon.ico" />
+</head> 
+<body background-color="#E6E6FA"> 
+<style type="text/css">
+    .important { color: #336699;
+        font-family: "Courier New", Courier, monospace ;
+    }
+    .bottom-three {
+     margin-bottom:  1cm;
+    }
+</style>
+<br>
+<!--First Container-->
+<div class="container">
+<div class="row">
+<div class="col-sm-2">
+    <img src="{{url_for('static', filename='logo.PNG')}}" alt="Chatbot Logo" style="width:150px;height:100px;">
+</div>
+<div class="col-sm-8 text-center">
+    <br>
+    <h1 class="important"><b>Sign Up Task</b></h1>
+</div>
+</div>
+</div>
+
+<!--Second Container-->
+<div class="container">
+<div class="row">
+<div class="col-sm-1"></div>
+<div class="col-sm-4">
+    {% if f==1 %}
+    <form method="POST" action="http://localhost:80/Chatbot/data_signup.php">
+    <input type="text" class="form-control" name="uid" value="{{uid}}" >
+    <br>
+    <input type="text" class="form-control" name="name" placeholder="Username" >
+    <br>
+    <input type="text" class="form-control" name="mail" placeholder="Email" >
+    <br>
+    <input type="password" class="form-control" name="password" placeholder="Password" >
+    <br>
+    <input type="password" class="form-control" name="reenter" placeholder="Re-enter Password" >
+    <br>
+    <input type="Date" class="form-control" name="dob" placeholder="{{today_date}}" >
+    <br>
+    <select name="organisation" class="form-control">
+        <option value= "Others">Others</option>
+        {% for org in organisation %}
+        <option value= "{{org}}">{{org}}</option>
+        {% endfor %}
+        <option value= "Others">Others</option>
+    </select>
+    <br>
+    {% else %}
+    <form method="POST" action="http://localhost:80/Chatbot/data_signup.php">
+        <input type="text" class="form-control" name="uid" value="{{uid}}" >
+        <br>
+        <input type="text" class="form-control" name="name" value="{{name}}" >
+        <br>
+        <input type="text" class="form-control" name="mail" value="{{email}}" >
+        <br>
+        <input type="password" class="form-control" name="password" value="{{password}}" >
+        <br>
+        <input type="password" class="form-control" name="reenter"value="{{repassword}}" >
+        <br>
+        <input type="Date" class="form-control" name="dob" value="{{today_date}}" >
+        <br>
+        <select name="organisation" class="form-control">
+            <option value="{{organi}}">{{organi}}</option>
+            {% for org in organisation %}
+            <option value= "{{org}}">{{org}}</option>
+            {% endfor %}
+            <option value= "Others">Others</option>
+        </select>
+        <br>
+        {% endif %}
+  
+</div>
+
+<div class="col-sm-4">
+    
+        <div id="my_camera"></div>
+        <br/>
+        <input type="hidden" name="image" class="image-tag">
+        <br/>
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6">
+        <button type="submit" class="btn btn-primary center-block" id ="sub" onclick="take_snapshot()">Take a Snap</button>
+        </div>
+        </form>
+                     
+</div>
+</div>
+<br>
+{% if f==0 %}
+<div class="container">
+<table class="table">
+{%for i in range(0,len,5)%}
+<tr>
+{%for j in range(i,i+5)%}
+{% if len > j %}
+<td class="col-md-offset-2">
+ <img src="{{url_for('static', filename=('login/'+img[j]))}}" alt="{{img[j]}}" style="width:100px;height:100px;"> 
+ </td>
+{%endif%}
+{%endfor%} 
+</tr>
+{%endfor%}  
+</table>
+</div>
+{%endif%}
+<br>
+<div class="container">
+<div class="col-sm-5"></div>
+<div class="col-sm-2"><a href="signup_face_val?id={{uid}}" class="btn btn-success center-block">Sign Up</a></div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+<!-- Configure a few settings and attach camera -->
+<script language="JavaScript">
+    Webcam.set({
+    width: 590,
+    height: 390,
+    image_format: 'jpeg',
+    jpeg_quality: 90
+    });
+    
+    Webcam.attach( '#my_camera' );
+    
+    function take_snapshot() {
+    Webcam.snap( function(data_uri) {
+    $(".image-tag").val(data_uri);
+    document.getElementById('my_camera').innerHTML = '<img src="'+data_uri+'"/>';
+    document.getElementById('sub').click();
+    } );
+    }
+    </script>
+</script>    
+<br>
+<br>
+</body>
+</html> 

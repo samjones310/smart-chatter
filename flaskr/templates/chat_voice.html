@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+    <meta charset='utf-8' />
+<title>Chatbot</title>
+<head>
+<link rel="shortcut icon" type="image/x-icon" href="http://samjc310.000webhostapp.com/blog/favicon.ico" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<style>
+body {
+margin: 40px 10px;
+padding: 0;
+font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+font-size: 14px;
+}
+
+#calendar {
+max-width: 900px;
+margin: 0 auto;
+}
+
+</style>
+<style type="text/css">
+.important { color: #336699;
+font-family: "Courier New", Courier, monospace ;
+}
+</style>
+<style>
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+background-color: #17A2B8;
+}
+.dropdown-menu{
+top: 60px;
+right: 0px;
+left: unset;
+width: 760px;
+box-shadow: 0px 5px 7px -1px #c1c1c1;
+padding-bottom: 0px;
+padding: 0px;
+}
+.dropdown-menu:before{
+content: "";
+position: absolute;
+top: -20px;
+right: 12px;
+border:10px solid #343A40;
+border-color: transparent transparent #343A40 transparent;
+}
+.head{
+padding:5px 15px;
+border-radius: 3px 3px 0px 0px;
+}
+.footer{
+padding:5px 15px;
+border-radius: 0px 0px 3px 3px; 
+}
+.notification-box{
+padding: 10px 0px; 
+}
+.bg-gray{
+background-color: #eee;
+}
+@media (max-width: 640px) {
+.dropdown-menu{
+top: 50px;
+left: -16px;  
+width: 290px;
+} 
+.nav{
+display: block;
+}
+.nav .nav-item,.nav .nav-item a{
+padding-left: 0px;
+}
+.message{
+font-size: 13px;
+}
+}
+body {
+font-family: monospace;
+}
+h1 {
+background-color: yellow;
+display: inline-block;
+font-size: 3em;
+margin: 0;
+padding: 14px;
+}
+h3 {
+color: black;
+font-size: 20px;
+margin-top: 3px;
+text-align: center;
+}
+#chatbox {
+margin-left: auto;
+margin-right: auto;
+width: 80%;
+margin-top: 60px;
+height: 50%;
+}
+#userInput {
+margin-left: auto;
+margin-right: auto;
+width: 40%;
+margin-top: 60px;
+}
+#textInput {
+width: 90%;
+border: none;
+border-bottom: 3px solid black;
+font-family: monospace;
+font-size: 17px;
+}
+.userText {
+color: white;
+font-family: monospace;
+font-size: 17px;
+text-align: right;
+line-height: 30px;
+}
+.userText span {
+background-color: #808080;
+padding: 10px;
+border-radius: 2px;
+}
+.botText {
+color: white;
+font-family: monospace;
+font-size: 17px;
+text-align: left;
+line-height: 30px;
+}
+.botText span {
+background-color: #4169e1;
+padding: 10px;
+border-radius: 2px;
+}
+#tidbit {
+position: absolute;
+bottom: 0;
+right: 0;
+width: 300px;
+}
+.boxed {
+margin-left: auto;
+margin-right: auto;
+width: 78%;
+margin-top: 60px;
+border: 1px solid green;
+}
+.box {
+border: 2px solid black;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+<div class="row">
+<div class="col-sm-1">
+<br>
+<img src="{{url_for('static',filename=(img_name))}}" alt="{{img_name}}" style="width:150px;height:100px;"> 
+</div>
+<div class="col-sm-11 text-center">
+<br>
+<h2 class="important"><b>CHATBOT  </b>Intergrated with ML & AI applications.</h2>
+</div>
+</div>
+</div>
+
+<div class="container">
+<div class="row">
+<div class="col-sm-6"></div>  
+<div class="col-sm-2">
+<ul class="nav nav-pills mr-auto justify-content-end">
+<li class="nav-item dropdown">
+<a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<span class="btn btn-primary btn-mg glyphicon glyphicon-calendar"></span></a>
+<ul class="dropdown-menu">
+    <h6 class="important text-center">Today Events</h6>
+    <li>
+    <table class="table table-striped table-bordered">
+    <tr>
+    <td>Subject</td>
+    <td>Start Time</td>
+    <td>End Time</td>
+    <td>Type</td>
+    <td>Description</td>
+    </tr>
+    {% for i in range (0,callen) %}
+    <tr>
+    <td>{{cale[i][1]}}</td>
+    <td>{{cale[i][0]}}</td>
+    <td>{{cale[i][3]}}</td>
+    <td>{{cale[i][2]}}</td>
+    <td>{{cale[i][4]}}</td>
+    </tr>
+    </li>
+    {% endfor %}
+</table>
+</li>
+    <li class="footer bg-dark text-center">
+        <a href="/calendar?sid={{userid}}" target="_blank" class="text-light">View Calendar</a>
+</ul>
+<li class="nav-item dropdown">
+<a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<span class="btn btn-primary btn-mg glyphicon glyphicon-bell"></span></a>
+<ul class="dropdown-menu">
+<li class="head text-light bg-dark">
+<div class="row">
+<div class="col-lg-12 col-sm-12 col-12">
+<span>Notifications ({{notilen}})</span>
+<a href="/notifcation_read?username={{userid}}" class="float-right text-light">Mark all as read</a>
+</div>
+<table class="table table-striped table-bordered">
+<tr>
+<td>Start Time</td>
+<td>Subject</td>
+<td>Type</td>
+<td>Descriptionn</td>
+</tr>
+</li>
+{% for i in range (0,notilen) %}
+<tr>
+<td>{{li[i][1]}}</td>
+<td>{{li[i][0]}}</td>
+<td>{{li[i][2]}}</td>
+<td>{{li[i][3]}}</td>
+</tr>
+{% endfor %}
+</table>
+<li class="footer bg-dark text-center">
+<a href="/notification?sid={{userid}}" class="text-light">View All</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="col-sm-3">
+<input type="readonly" class="form-control" name="name" id="username" value={{userid}}></label></div>
+<div class="col-sm-1"></div>
+</div>
+</div>
+</div>
+
+<div class="box"></div>
+<div class="boxed">
+<div>
+<div id="chatbox">
+<p class="botText important">
+</p>
+</div>
+<div id="userInput">
+<div class="row">
+<div class="col-sm-10">
+<input id="textInput" type="text" name="msg" class="form-control" placeholder="Message" >
+</div>
+<div class="col-sm-2">
+<button id="start-record-btn" class="center-block" title="Start Recording"><i style='font-size:24px' class='fas'>&#xf130;</i></button>
+</div>
+</div>
+<br>
+<input type="hidden" class="form-control important " id="speech" value="Voice Recognition Started.Start Speaking">
+</div>
+
+<script type="text/javascript">
+function getBotResponse() {
+var inp = $("#textInput").val();
+var name = $("#username").val();
+var rawText = inp+'$'+name;
+var userHtml = '<p class="userText important"><span>' + inp + "</span></p>";
+$("#textInput").val("");
+$("#chatbox").append(userHtml);
+document
+.getElementById("userInput")
+.scrollIntoView({ block: "start", behavior: "smooth" });
+$.get("/get", { msg: rawText }).done(function(data) {
+var res = data.split("$");
+var botHtml = '<p class="botText"><span>' + res[0] + "</span></p>";
+var botHtml = botHtml + "<a href="+res[1]+" target=_blank>Click here</a>";
+$("#chatbox").append(botHtml);
+document
+.getElementById("userInput")
+.scrollIntoView({ block: "start", behavior: "smooth" });
+});
+}
+function getvoice() {
+$.get("/voice").done(function(data) {
+var res = data;
+document.getElementById("textInput").value = res;
+});
+}
+$("#textInput").keypress(function(e) {
+if (e.which == 13) {
+getBotResponse();
+}
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+try {
+var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+var recognition = new SpeechRecognition();
+}
+catch(e) {
+console.error(e);
+$('.no-browser-support').show();
+$('.app').hide();
+}
+var noteTextarea = $('#textInput');
+var instructions = $('#recording-instructions');
+var noteContent = '';
+// Get all notes from previous sessions and display them.
+//Voice Recognition 
+// If false, the recording will stop after a few seconds of silence. When true, the silence period is longer (about 15 seconds),
+// allowing us to keep recording even when the user pauses. 
+recognition.continuous = false;
+// This block is called every time the Speech APi captures a line. 
+recognition.onresult = function(event) {
+// event is a SpeechRecognitionEvent object.It holds all the lines we have captured so far.We only need the current one.
+var current = event.resultIndex;
+// Get a transcript of what was said.
+var transcript = event.results[current][0].transcript;
+// Add the current transcript to the contents of our Note. There is a weird bug on mobile, where everything is repeated twice.
+// There is no official solution so far so we have to handle an edge case.
+var mobileRepeatBug = (current == 1 && transcript == event.results[0][0].transcript);
+if(!mobileRepeatBug) {
+noteContent += transcript;
+noteTextarea.val(noteContent);
+if (noteContent.match(/ok chat/gi)){
+noteContent='';
+getBotResponse();
+document.getElementById('speech').type = 'hidden';
+}
+if (noteContent.match(/end/gi)){
+noteContent='';
+getBotResponse();
+document.getElementById('speech').type = 'hidden';
+}
+}
+};
+recognition.onstart = function() { 
+instructions.text('Voice recognition activated. Try speaking into the microphone.');
+}
+recognition.onspeechend = function() {
+document.getElementById('speech').type = 'hidden';
+instructions.text('You were quiet for a while so voice recognition turned itself off.');
+}
+recognition.onerror = function(event) {
+if(event.error == 'no-speech') {
+instructions.text('No speech was detected. Try again.');  
+};
+}
+/*-----------------------------
+App buttons and input 
+------------------------------*/
+$('#start-record-btn').on('click', function(e) {
+if (noteContent.length) {
+noteContent += ' ';
+}
+document.getElementById('speech').type = 'text';
+recognition.start();
+});
+</script>
+<!-- Only used for the demos ads. Please ignore and remove. --> 
+<script src="https://cdn.tutorialzine.com/misc/enhance/v3.js" async></script>
+</div>
+</body>
+</html>
